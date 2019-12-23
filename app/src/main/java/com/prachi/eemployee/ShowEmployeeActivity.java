@@ -27,8 +27,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ShowEmployeeActivity extends AppCompatActivity {
    // TextView tvEmployee;
+   private  EmployeeAdaptar employeeAdapter;
    RecyclerView recyclerView;
-    List<EmployeeView> employeeViewList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,18 +64,19 @@ public class ShowEmployeeActivity extends AppCompatActivity {
 
                     return;
                 }
+                LoadDataList(response.body());
 
-                List<Employee> employeeList=response.body();
+                /*List<Employee> employeeList=response.body();
 
                 for (Employee emp : employeeList)
-                {
+                {*/
                   /*  String data ="";
                     data +="Name is:" +emp.getEmployee_name()+ "\n";
                     data +="Salary is:" +emp.getEmployee_salary()+ "\n";
                     data +="------------------------------------------"+ "\n";
                     tvEmployee.append(data);*/
 
-                    int id,age;
+                   /* int id,age;
                     String name;
                     float salary;
                     id = emp.getId();
@@ -83,12 +85,12 @@ public class ShowEmployeeActivity extends AppCompatActivity {
                     salary = emp.getEmployee_salary();
                    employeeViewList.add(new EmployeeView(id,name,salary,age));
                     //employeeViewList.add(new EmployeeView(2,"You:Aw,come on.Seriously?",9879,2));
-
+*/
 
 
                 }
 
-            }
+
 
             @Override
             public void onFailure(Call<List<Employee>> call, Throwable t) {
@@ -98,10 +100,20 @@ public class ShowEmployeeActivity extends AppCompatActivity {
 
             }
         });
+}
+    //get refrence to the retrieved data as a list
+    private void LoadDataList(List<Employee>employeeList){
+        recyclerView=findViewById(R.id.recyclerView);
+        employeeAdapter=new EmployeeAdaptar(employeeList);
 
-        EmployeeAdapter employeeAdapter = new EmployeeAdapter(this,employeeViewList);
+
+        //using a linear layout manager
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(ShowEmployeeActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        //set adapter to the recyclerview
         recyclerView.setAdapter(employeeAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
     }
-}
+
