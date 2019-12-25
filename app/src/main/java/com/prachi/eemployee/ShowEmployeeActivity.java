@@ -6,17 +6,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.prachi.eemployee.API.EmployeeAPI;
 import com.prachi.eemployee.model.Employee;
 import com.prachi.eemployee.url.URL;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
